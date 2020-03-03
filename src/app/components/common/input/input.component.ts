@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -16,17 +16,10 @@ export class InputComponent implements OnInit, OnDestroy {
   @Output() currentValue = new EventEmitter<string | null>(null);
 
   form: FormGroup;
-
-  constructor() { }
-  value$: Observable<any> = of(null);
   subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.value$.subscribe((value: string | null) => {
-        this.form = this.initForm(value);
-      })
-    );
+    this.form = this.initForm(null);
 
     this.subscription.add(
       this.form.get('inputValue').valueChanges.pipe(
