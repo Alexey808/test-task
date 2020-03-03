@@ -1,5 +1,7 @@
 <form [formGroup]="form">
-  <div>
-    <input type="text" placeholder="Введите строку" formControlName="textInput"/>
-  </div>
-</form>
+  <form [formGroup]="form" class="form">
+    <div>
+      <input type="text" placeholder="Введите строку" formControlName="textInput"/>
+      <input type="text" formControlName="textInput" class="input"/>
+    </div>
+  </form>
